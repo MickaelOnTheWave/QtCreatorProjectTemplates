@@ -1,4 +1,4 @@
-** Qt Creator Project Wizard Templates **
+# Qt Creator Project Wizard Templates
 
 The folders in this repository contains project wizards for Qt Creator. 
 
