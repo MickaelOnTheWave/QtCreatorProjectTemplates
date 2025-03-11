@@ -3,7 +3,7 @@
     "supportedProjectTypes": [ "CMakeProjectManager.CMakeProject"],
     "id": "R.mdcg-cpp",
     "category": "I.Projects",
-    "trDescription": "Creates a simple C++ application; with MY project structure.",
+    "trDescription": "Creates a simple C++ application, with MY project structure.",
     "trDisplayName": "MDCG C++ Application",
     "trDisplayCategory": "Non-Qt Project",
     "icon": "../../global/consoleapplication.png",
