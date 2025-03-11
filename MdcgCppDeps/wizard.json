@@ -1,10 +1,10 @@
 {
     "version": 1,
     "supportedProjectTypes": [ "CMakeProjectManager.CMakeProject"],
-    "id": "R.mdcg-cpp-project2",
+    "id": "R.mdcg-cpp-deps",
     "category": "I.Projects",
-    "trDescription": "Creates a simple C++ application with a dependency to BasicToolsLib. Using Mickaël's folder structure.",
-    "trDisplayName": "MDCG C++ Application",
+    "trDescription": "Creates a simple C++ application with a dependency to BasicToolsLib. Using MY project structure.",
+    "trDisplayName": "MDCG C++ Application with Deps",
     "trDisplayCategory": "Non-Qt Project",
     "icon": "../../global/consoleapplication.png",
     "iconKind": "Themed",
@@ -25,26 +25,40 @@
             "typeId": "Project"
         },
         {
-            "trDisplayName": "Define Build System",
-            "trShortTitle": "Build System",
+            "trDisplayName": "Project Details",
+            "trShortTitle": "Details",
             "typeId": "Fields",
-            "enabled": "%{JS: ! %{IsSubproject}}",
             "data":
             [
                 {
-                    "name": "BuildSystem",
-                    "trDisplayName": "Build system:",
+                    "name": "ProjectName",
+                    "trDisplayName": "Project Name:",
+                    "type": "LineEdit"
+                },
+                {
+                    "name": "ProjectDescription",
+                    "trDisplayName": "Project Description:",
+                    "type": "TextEdit"
+                },
+                {
+                    "name": "Licence",
+                    "trDisplayName": "Project Licence:",
                     "type": "ComboBox",
-                    "persistenceKey": "BuildSystemType",
+                    "persistenceKey": "LicenceType",
                     "data":
                     {
                         "index": 0,
                         "items":
                         [
                             {
-                                "trKey": "CMake",
-                                "value": "cmake",
-                                "condition": "%{JS: value('Plugins').indexOf('CMakeProjectManager') >= 0}"
+                                "trKey": "GPL v3",
+                                "value": "gpl3",
+                                "condition": true
+                            },
+                            {
+                                "trKey": "Proprietary",
+                                "value": "proprietary",
+                                "condition": true
                             }
                         ]
                     }
@@ -77,12 +91,17 @@
                 },
                 {
                     "source": "libs/CMakeLists.txt",
-                    "condition": "%{JS: '%{BuildSystem}' === 'cmake'}"
+                    "condition": true
+                },
+                                {
+                    "source": "LICENCE-gpl3",
+                    "target": "LICENCE",
+                    "condition": "%{JS: '%{Licence}' === 'gpl3'}"
                 },
                 {
-                    "source": "LICENSE",
-                    "target": "LICENSE",
-                    "openInEditor": false
+                    "source": "LICENCE-proprietary",
+                    "target": "LICENCE",
+                    "condition": "%{JS: '%{Licence}' === 'proprietary'}"
                 },
                 {
                     "source": "VERSION",

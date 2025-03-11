@@ -22,5 +22,5 @@ add_executable(%{ProjectName} ${PROJ_SRC})
 target_link_libraries(%{ProjectName} BasicToolsLib)
 
 add_custom_target(Other SOURCES
-    VERSION LICENSE README.md
+    VERSION LICENCE README.md
 )

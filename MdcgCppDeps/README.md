@@ -1,5 +1,8 @@
 # %{ProjectName}
 
+%{ProjectDescription}
+
+
 ## Post-Setup
 This project depends on a git submodule: `BasicToolsLib`.
 After creating the project, please run:
