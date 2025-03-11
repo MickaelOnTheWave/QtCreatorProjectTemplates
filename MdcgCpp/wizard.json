@@ -1,0 +1,120 @@
+{
+    "version": 1,
+    "supportedProjectTypes": [ "CMakeProjectManager.CMakeProject"],
+    "id": "R.mdcg-cpp",
+    "category": "I.Projects",
+    "trDescription": "Creates a simple C++ application; with MY project structure.",
+    "trDisplayName": "MDCG C++ Application",
+    "trDisplayCategory": "Non-Qt Project",
+    "icon": "../../global/consoleapplication.png",
+    "iconKind": "Themed",
+    "enabled": "%{JS: value('Plugins').indexOf('CppEditor') >= 0 && value('Plugins').indexOf('CMakeProjectManager') >= 0}",
+
+    "options":
+    [
+        { "key": "ProjectFile", "value": "%{CMakeFile}" },
+        { "key": "CMakeFile", "value": "%{ProjectDirectory}/CMakeLists.txt" },
+        { "key": "CppFileName", "value": "%{JS: 'main.' + Util.preferredSuffix('text/x-c++src')}" }
+    ],
+
+    "pages":
+    [
+        {
+            "trDisplayName": "Project Location",
+            "trShortTitle": "Location",
+            "typeId": "Project"
+        },
+        {
+            "trDisplayName": "Project Details",
+            "trShortTitle": "Details",
+            "typeId": "Fields",
+            "data":
+            [
+                {
+                    "name": "ProjectName",
+                    "trDisplayName": "Project Name:",
+                    "type": "LineEdit"
+                },
+                {
+                    "name": "ProjectDescription",
+                    "trDisplayName": "Project Description:",
+                    "type": "TextEdit"
+                },
+                {
+                    "name": "Licence",
+                    "trDisplayName": "Project Licence:",
+                    "type": "ComboBox",
+                    "persistenceKey": "LicenceType",
+                    "data":
+                    {
+                        "index": 0,
+                        "items":
+                        [
+                            {
+                                "trKey": "GPL v3",
+                                "value": "gpl3",
+                                "condition": true
+                            },
+                            {
+                                "trKey": "Proprietary",
+                                "value": "proprietary",
+                                "condition": true
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "trDisplayName": "Kit Selection",
+            "trShortTitle": "Kits",
+            "typeId": "Kits",
+            "enabled": "%{JS: ! %{IsSubproject}}",
+            "data": { "projectFilePath": "%{ProjectFile}" }
+        },
+        {
+            "trDisplayName": "Project Management",
+            "trShortTitle": "Summary",
+            "typeId": "Summary"
+        }
+    ],
+    "generators":
+    [
+        {
+            "typeId": "File",
+            "data":
+            [
+                {
+                    "source": "CMakeLists.txt",
+                    "openAsProject": true,
+                    "condition": true
+                },
+                {
+                    "source": "LICENCE-gpl3",
+                    "target": "LICENCE",
+                    "condition": "%{JS: '%{Licence}' === 'gpl3'}"
+                },
+                {
+                    "source": "LICENCE-proprietary",
+                    "target": "LICENCE",
+                    "condition": "%{JS: '%{Licence}' === 'proprietary'}"
+                },
+                {
+                    "source": "VERSION",
+                    "target": "VERSION",
+                    "openInEditor": false
+                },
+                {
+                    "source": "README.md",
+                    "target": "README.md",
+                    "openInEditor": false
+                },
+                {
+                    "source": "src/main.cpp",
+                    "target": "src/main.cpp",
+                    "openInEditor": true
+                }
+            ]
+        }
+    ]
+}
